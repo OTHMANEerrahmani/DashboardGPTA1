@@ -39,12 +39,12 @@ def organe_detail_view() -> rx.Component:
                             class_name="text-xl font-semibold text-gray-700 mb-2",
                         ),
                         rx.el.image(
-                            src=OrganeState.selected_organe[
-                                "image_url"
-                            ].else_("/favicon.ico"),
-                            alt=OrganeState.selected_organe[
-                                "name"
-                            ],
+                            src=rx.cond(
+                                OrganeState.selected_organe["image_url"].is_none(),
+                                "/favicon.ico",
+                                OrganeState.selected_organe["image_url"]
+                            ),
+                            alt=OrganeState.selected_organe["name"],
                             class_name="w-full h-64 object-contain rounded-lg border border-gray-200 p-4 bg-white shadow-sm mb-8",
                         ),
                         class_name="bg-gray-50 p-6 rounded-xl shadow-lg border border-gray-200 mb-8",

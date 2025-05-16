@@ -7,7 +7,11 @@ def organe_preview_card(
 ) -> rx.Component:
     return rx.el.div(
         rx.el.image(
-            src=organe["image_url"].else_("/favicon.ico"),
+            src=rx.cond(
+                organe["image_url"].is_none(),
+                "/favicon.ico",
+                organe["image_url"]
+            ),
             alt=organe["name"],
             class_name="w-full h-40 object-contain rounded-t-lg bg-gray-200 p-2",
         ),
@@ -31,7 +35,7 @@ def organe_preview_card(
 
 
 def add_organe_dialog() -> rx.Component:
-    return rx.el.dialog(
+    return rx.dialog(
         rx.el.form(
             rx.el.div(
                 rx.el.h2(
@@ -128,7 +132,7 @@ def add_organe_dialog() -> rx.Component:
         ),
         open=OrganeState.show_add_organe_dialog,
         on_open_change=OrganeState.toggle_add_organe_dialog,
-        class_name="fixed inset-0 open:flex items-center justify-center bg-black bg-opacity-50 p-4 z-50",
+        class_name="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50",
     )
 
 

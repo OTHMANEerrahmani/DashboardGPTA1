@@ -1,6 +1,5 @@
 import reflex as rx
 from app.states.organe_state import OrganeState
-from app.app import State
 
 
 def sidebar_link(
@@ -21,7 +20,7 @@ def sidebar_link(
 
 
 def sidebar() -> rx.Component:
-    current_path = State.router.page.path
+    current_path = rx.State.router.page.path
     return rx.el.div(
         rx.el.div(
             rx.el.h2(
